@@ -1,0 +1,61 @@
+-- Create the database
+CREATE DATABASE MaintenancePartsDB;
+
+-- Use the newly created database
+USE MaintenancePartsDB;
+
+-- Create the Suppliers table
+CREATE TABLE Suppliers (
+    SupplierID INT AUTO_INCREMENT PRIMARY KEY,
+    SupplierName VARCHAR(255),
+    ContactName VARCHAR(255),
+    ContactEmail VARCHAR(255),
+    ContactPhone VARCHAR(20),
+    Address VARCHAR(255)
+);
+
+-- Create the Locations table
+CREATE TABLE Locations (
+    LocationID INT AUTO_INCREMENT PRIMARY KEY,
+    LocationName VARCHAR(255),
+    Description VARCHAR(255)
+);
+
+-- Create the Parts table
+CREATE TABLE Parts (
+    PartID INT AUTO_INCREMENT PRIMARY KEY,
+    PartName VARCHAR(255),
+    PartNumber VARCHAR(50),
+    Description TEXT,
+    SupplierID INT,
+    StockQuantity INT,
+    ReorderLevel INT,
+    UnitPrice DECIMAL(10, 2),
+    LastRestockDate DATE,
+    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
+);
+
+-- Create the Transactions table
+CREATE TABLE Transactions (
+    TransactionID INT AUTO_INCREMENT PRIMARY KEY,
+    PartID INT,
+    LocationID INT,
+    TransactionDate DATE,
+    TransactionType VARCHAR(50),
+    Quantity INT,
+    UnitPrice DECIMAL(10, 2),
+    TotalPrice DECIMAL(10, 2),
+    FOREIGN KEY (PartID) REFERENCES Parts(PartID),
+    FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
+);
+
+-- Create the Users table (if needed)
+CREATE TABLE Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) UNIQUE,
+    Password VARCHAR(255), -- Store hashed passwords
+    Role ENUM('Admin', 'Staff')
+);
+
+
+-- Add additional columns or remove columns as required before copying into phpmyadmin sql to make database and tables.
