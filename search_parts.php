@@ -4,9 +4,10 @@
 <h1 class="mt-4">Part Search</h1>
 <form method="GET" action="search_parts.php">
     <div class="form-group">
-        <label for="searchTerm">Search Term:</label>
+        <label for="searchTerm"><strong>Search Term:</strong></label>
         <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Enter search term">
     </div>
+    <br>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
@@ -39,14 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["searchTerm"])) {
             echo "<p class='card-text'><strong>Part Number: </strong>" . $row['PartNumber'] . "</p>";
             echo "<p class='card-text'><strong>Old Part Number: </strong>" . $row['PartNumberOld'] . "</p>";
             echo "<p class='card-text'><strong>Description: </strong>" . $row['Description'] . "</p>";
+            echo "<p class='card-text'><strong>Location: </strong>" . $row['Location'] . "</p>";
             echo "<p class='card-text'><strong>Stock Qauntity: </strong>" . $row['StockQuantity'] . "</p>";
             echo "<p class='card-text'><strong>Unit Price: </strong>" . $row['UnitPrice'] . "</p>";
+            echo "<p class='card-text'><strong>Last Restock Date: </strong>" . $row['LastRestockDate'] . "</p>";
             // Display other details as needed
             echo "<br>";
             echo '</div>'; // Close card-body
             echo '</div>'; // Close card
             $partID = $row['PartID'];
-            echo '<a href="edit_part.php?partID=' . $partID . '" class="btn btn-primary">Edit</a>';
+            echo '<a href="includes\update_parts.php?PartID=' . $partID . '" class="btn btn-primary">Edit</a>';
         }
 
         // Close the database connection
